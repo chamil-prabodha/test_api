@@ -1,6 +1,7 @@
 package net.cake.controller;
 
 import net.cake.model.requestmodel.UserRequest;
+import net.cake.model.responsemodel.ErrorResponse;
 import net.cake.model.responsemodel.UserResponse;
 import net.cake.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,24 @@ public class UserController {
   private AppService appService;
 
   @GetMapping("/user/{username}")
-  private ResponseEntity<UserResponse> getUser(@PathVariable(value = "username") String userName) {
+  private ResponseEntity getUser(@PathVariable(value = "username") String userName) {
     UserResponse userResponse = appService.getUser(userName);
-    return userResponse == null ? new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST):
-        new ResponseEntity<>(userResponse, HttpStatus.OK);
+    if (userResponse == null) {
+      ErrorResponse errorResponse = new ErrorResponse();
+      errorResponse.setError("unable to find user: " + userName);
+      return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<>(userResponse, HttpStatus.OK);
   }
 
   @PostMapping("/user/")
-  private ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
+  private ResponseEntity createUser(@RequestBody UserRequest userRequest) {
     UserResponse userResponse = appService.createUser(userRequest);
-    return userResponse == null ? new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST):
-        new ResponseEntity<>(userResponse, HttpStatus.OK);
+    if (userResponse == null) {
+      ErrorResponse errorResponse = new ErrorResponse();
+      errorResponse.setError("unable to create user");
+      return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    return new ResponseEntity<>(userResponse, HttpStatus.OK);
   }
 }

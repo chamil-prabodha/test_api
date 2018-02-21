@@ -24,7 +24,8 @@ public class TransformerService {
 
   public User createUser(UserRequest userRequest) {
     User user = new User();
-    if (userRequest != null) {
+    if (userRequest != null && userRequest.getUserName() != null && !userRequest.getUserName().isEmpty()
+        && userRequest.getEmail() != null && !userRequest.getEmail().isEmpty()) {
       user.setUserName(userRequest.getUserName());
       user.setEmail(userRequest.getEmail());
       return user;
