@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories("net.cake.dao")
-@EntityScan(basePackages = "net.cake.model")
+@EntityScan(basePackages = "net.cake.model.datamodel")
 public class App {
   public static void main(String[] args) throws Exception {
     SpringApplication.run(App.class, args);
