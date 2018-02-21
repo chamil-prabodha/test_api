@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class MainController {
 
-  @Autowired
-  private AppService appService;
+  //TODO inject app service
 
   @GetMapping("/status")
   public ResponseEntity<AppService> getStatus() {
-    return new ResponseEntity(appService.getAppStatus(), HttpStatus.OK);
+    //TODO fill here with get status logic
+    return null;
   }
 }

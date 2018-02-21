@@ -15,41 +15,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class AppService {
 
-  @Value("${app.name}")
-  private String appName;
+  //TODO inject app name
 
-  @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private TransformerService transformerService;
+  //TODO inject user repository
+  //TODO inject transformer service
 
   public AppResponse getAppStatus() {
-    AppResponse appResponse = new AppResponse();
-    appResponse.setAppName(appName);
-    appResponse.setStatus("running");
-    return appResponse;
+    //TODO fill here with get app status logic
+    return null;
   }
 
   public UserResponse getUser(String username) {
-    try {
-      User user = userRepository.findUserByUserNameEquals(username);
-      return transformerService.createUserResponse(user);
-    } catch (Exception e) {
-      return null;
-    }
+    //TODO fill here with get user logic
+    return null;
   }
 
   public UserResponse createUser(UserRequest userRequest) {
-    try {
-      User user = transformerService.createUser(userRequest);
-      User createdUser = null;
-      if (user != null) {
-        createdUser = userRepository.saveAndFlush(user);
-        return transformerService.createUserResponse(createdUser);
-      }
-      return null;
-    } catch (Exception e) {
-      return null;
-    }
+    //TODO fill here wwith create user logic
+    return null;
   }
 }

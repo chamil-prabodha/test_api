@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
 @EnableJpaRepositories
 @Transactional
 public interface UserRepository extends JpaRepository<User, Integer>{
-  public User findUserByUserNameEquals(String userName);
+  //TODO fill here with get user from db logic
 }

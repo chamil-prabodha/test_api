@@ -21,28 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class UserController {
 
-  @Autowired
-  private AppService appService;
+  //TODO inject app service
 
   @GetMapping("/user/{username}")
   private ResponseEntity getUser(@PathVariable(value = "username") String userName) {
-    UserResponse userResponse = appService.getUser(userName);
-    if (userResponse == null) {
-      ErrorResponse errorResponse = new ErrorResponse();
-      errorResponse.setError("unable to find user: " + userName);
-      return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-    return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    //TODO fill here with get user logic
+    return null;
   }
 
   @PostMapping("/user/")
   private ResponseEntity createUser(@RequestBody UserRequest userRequest) {
-    UserResponse userResponse = appService.createUser(userRequest);
-    if (userResponse == null) {
-      ErrorResponse errorResponse = new ErrorResponse();
-      errorResponse.setError("unable to create user");
-      return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-    return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    //TODO fill here with create user logic
+    return null;
   }
 }
